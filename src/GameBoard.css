@@ -1,0 +1,5 @@
+.GameBoard{
+    max-height: 40vh;
+    overflow-x: auto;
+    overflow-y: auto;
+}

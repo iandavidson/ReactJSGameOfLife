@@ -2,13 +2,9 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
 .App-header {
   background-color: #282c34;
-  min-height: 30vh;
+  min-height: 20vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,4 +15,11 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+/* fix height so it scales with size of GameBoard*/
+.GameBoard{
+    max-height: 40vh;
+    overflow-x: auto;
+    overflow-y: auto;
 }
