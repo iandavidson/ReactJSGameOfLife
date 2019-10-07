@@ -1,7 +1,7 @@
 .FilledCell{
-    color: #708090
+    background-color: #708090;
 }
 
 .EmptyCell{
-    color: #A0522D
+    background-color:#A0522D;
 }

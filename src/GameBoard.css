@@ -1,5 +1,5 @@
 .GameBoard{
-    max-height: 40vh;
-    overflow-x: auto;
-    overflow-y: auto;
+    max-height: 65vh;
+    overflow-x: scroll;
+    overflow-y: scroll;
 }

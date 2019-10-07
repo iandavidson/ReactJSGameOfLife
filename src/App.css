@@ -18,8 +18,8 @@
 }
 
 /* fix height so it scales with size of GameBoard*/
-.GameBoard{
+/* .GameBoard{
     max-height: 40vh;
     overflow-x: auto;
     overflow-y: auto;
-}
+} */

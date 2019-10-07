@@ -6,6 +6,7 @@ import Control from "./Control.js";
 Notes:
 
 Default board size is [18, 18];
+Default update rate is 600
 
 Need to figure out starting shape patterns.
 
@@ -20,20 +21,33 @@ class App extends Component{
 		super(props);
 		let defaultSize = 0;
 		
+		let SimulationSpeeds = [
+			200,
+			400,
+			600,
+			800,
+		];
+
+
 		let BoardSizes = [
 			18,
 			36,
 			72,
 			144,
 		];
+		// this.initializeBoard(defaultSize, BoardSizes, true);
 		this.state = {
 			boardSize: defaultSize,
+			simulationSpeed: 3,
 			boardSizeSelection: BoardSizes,
+			simulationSpeedSelection: SimulationSpeeds,
 			board: this.initializeBoard(defaultSize, BoardSizes),
 			running: false,
 			locked: false
 		};
 
+		this.setRunSpeed = this.setRunSpeed.bind(this);
+		this.fillCell = this.fillCell.bind(this);
 		this.resetBoard = this.resetBoard.bind(this);
 		this.startSimulation = this.startSimulation.bind(this);
 		this.lockBoard = this.lockBoard.bind(this);
@@ -43,10 +57,26 @@ class App extends Component{
 	//setPattern(board){}
 
 
+	setRunSpeed(index){
+		if (this.state.running) {
+			alert("Simulation is already running");
+		} else if (this.state.locked) {
+			alert("Board is locked, unlock to change speed");
+		}
+		this.setState({
+			simulationSpeed: index
+		});
+	}
+
 	setBoardSize(index){
+		if (this.state.running) {
+			alert("Simulation is already running");
+		} else if (this.state.locked) {
+			alert("Board is locked, unlock to change board size");
+		}
 		this.setState({
 			boardSize: index,
-			board: this.initializeBoard(this.state.boardSize, this.state.boardSizeSelection)
+			board: this.initializeBoard(index, this.state.boardSizeSelection)
 		});
 	}
 
@@ -59,13 +89,33 @@ class App extends Component{
 			//shouldn't start
 			alert("Cant start, you must lock the board.");
 		}else{
-
+			this.setState({
+				running: !this.state.running
+			});
 		}
-
 	}
 
 	resetBoard(){
-		this.setState({board: this.initializeBoard(this.state.boardSize, this.state.boardSizeSelection)});
+		this.setState({
+			running: false,
+			locked: false,
+			board: this.initializeBoard(this.state.boardSize, this.state.boardSizeSelection)
+		});
+	}
+
+	fillCell(rowIdx, colIdx){
+		if (this.state.running) {
+			alert("Simulation is already running");
+		} else if (this.state.locked) {
+			alert("Board is locked, unlock to fill cell");
+		}
+		console.log("fillCell fired");
+		//not sure if I should do it this way: make deep copy (may not be super smart when the board is very big...)
+		let boardTemp = JSON.parse(JSON.stringify(this.state.board));
+		boardTemp[rowIdx][colIdx] = !this.state.board[rowIdx][colIdx];
+		this.setState({
+			board: boardTemp
+		});
 	}
 
 	
@@ -79,8 +129,7 @@ class App extends Component{
 			}
 		}
 		//return setPattern(defaultBoard);
-		// return defaultBoard;
-		this.setState({board: defaultBoard});
+		
 		return defaultBoard;
 	}
 
@@ -94,15 +143,21 @@ class App extends Component{
 
 				<GameBoard 
 					board={this.state.board}
-					className="GameBoard"
+					fillCell={this.fillCell}
+					running={this.state.running}
+					updateSpeed={this.state.simulationSpeedSelection[this.state.simulationSpeed]}
 				/>
 
 				<Control 
+					running={this.state.running}
+					locked={this.state.locked}
 					startSimulation={this.startSimulation} 
 					lockBoard={this.lockBoard} 
 					resetBoard={this.resetBoard}
 					setBoardSize={this.setBoardSize}
+					setRunSpeed={this.setRunSpeed}
 					boardSizeSelection={this.state.boardSizeSelection}
+					simulationSpeedSelection={this.state.simulationSpeedSelection}
 				/>
 			</div>
 		);

@@ -12,8 +12,8 @@ class Cell extends Component{
         let {value, rowIdx, colIdx} = this.props;
         return (
             value 
-                ? <td key={getNewKey()} className="FilledCell" ></td>
-                : <td key={getNewKey()} className="EmptyCell" ></td>
+                ? <td onClick={() => this.props.fillCell(rowIdx, colIdx)} key={getNewKey()} className="FilledCell" ></td>
+                : <td onClick={() => this.props.fillCell(rowIdx, colIdx)} key={getNewKey()} className="EmptyCell" ></td>
         );  
     }
 }
