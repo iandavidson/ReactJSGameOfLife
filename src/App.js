@@ -28,7 +28,6 @@ class App extends Component{
 			800,
 		];
 
-
 		let BoardSizes = [
 			18,
 			36,
@@ -60,8 +59,10 @@ class App extends Component{
 	setRunSpeed(index){
 		if (this.state.running) {
 			alert("Simulation is already running");
+			return;
 		} else if (this.state.locked) {
 			alert("Board is locked, unlock to change speed");
+			return;
 		}
 		this.setState({
 			simulationSpeed: index
@@ -71,8 +72,10 @@ class App extends Component{
 	setBoardSize(index){
 		if (this.state.running) {
 			alert("Simulation is already running");
+			return;
 		} else if (this.state.locked) {
 			alert("Board is locked, unlock to change board size");
+			return;
 		}
 		this.setState({
 			boardSize: index,
@@ -88,6 +91,7 @@ class App extends Component{
 		if(this.state.locked === false){
 			//shouldn't start
 			alert("Cant start, you must lock the board.");
+			return;
 		}else{
 			this.setState({
 				running: !this.state.running
@@ -106,8 +110,10 @@ class App extends Component{
 	fillCell(rowIdx, colIdx){
 		if (this.state.running) {
 			alert("Simulation is already running");
+			return;
 		} else if (this.state.locked) {
 			alert("Board is locked, unlock to fill cell");
+			return;
 		}
 		console.log("fillCell fired");
 		//not sure if I should do it this way: make deep copy (may not be super smart when the board is very big...)
