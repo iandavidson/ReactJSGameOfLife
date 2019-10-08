@@ -24,3 +24,11 @@ Conway's Game of Life is a game is that follows a population of cells. After eac
 npm install
 npm start
 ```
+
+## Using App in Browser
+
+Cells can be clicked to toggle value.
+
+Board must be locked to update cell value or start the game.
+
+Gameboard size and update rate can selected.
